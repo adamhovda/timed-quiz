@@ -1,0 +1,10 @@
+li {
+    list-style-type: none;
+    padding: 4px;
+}
+
+#triviaBox {
+    font-size: large;
+    font-weight: bold;
+
+}
