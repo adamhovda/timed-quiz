@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <p>View high score</p>
+        <p id="scorePage">View high score</p>
         <p id="timer">Time: </p>
     </header>
 
@@ -27,6 +27,13 @@
         <div id="start"></div>
         <div id="correctWrong"></div>
         <button id="next">Next</button>
+        <form id="scoreInput" name="myForm">
+
+            <label for="initials">Enter your initials:</label><br>
+            <input type="text" id="initials" name="initials" value=""><br><br>
+            <input type="submit" value="Submit">
+
+        </form>
 
     </section>
 </body>
