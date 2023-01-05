@@ -1,14 +1,12 @@
 
 //creates initial text and button when a start
-document.getElementById("triviaBox").textContent = "Try to answer the following code related questions within the time limit.  Keep in mind an incorrect answer we penalize your score/time by 10 seconds";
-// const startBtn = document.createElement("button");
-// startBtn.innerHTML = "start";
-// const startButton = document.getElementById("start");
-// startButton.appendChild(startBtn);
+$triviabox = document.getElementById("triviaBox")
+$triviabox.textContent = "Try to answer the following code related questions within the time limit.  Keep in mind an incorrect answer we penalize your score/time by 10 seconds";
 // moved from line 49 to test
 let outcomeDiv = document.getElementById("correctWrong");
 let answ = document.querySelectorAll(".answers");
 let removeList = document.getElementById("ulremove");
+
 
 let questionArr = [];
 let count = 0;
@@ -100,7 +98,7 @@ nextBtn.addEventListener("click", function(){
 var secondsLeft = 60;
 
 function setTime() {
-  // Sets interval in variable
+    // Sets interval in variable
     window.timerInterval = setInterval(function() {
         let timerEl = document.getElementById("timer");
         secondsLeft--;
@@ -120,16 +118,89 @@ function setTime() {
 
 function highscore(){
     clearInterval(timerInterval);
-    document.getElementById("triviaBox").textContent = "Enter your initials";
+    // document.getElementById("triviaBox").textContent = "Enter your initials";
     nextBtn.remove();
     outcomeDiv.remove();
     removeList.remove();
     console.log("high score page");
     console.log(secondsLeft);
+    //create high score input form
+    document.getElementById("scoreInput").style.display = "block";
+    
+    
+    
+    
+    
+    // const startBtn = document.createElement("button");
+    // startBtn.innerHTML = "start";
+    // const startButton = document.getElementById("start");
+    // startButton.appendChild(startBtn);
 }
 
+// inputHiscore.addEventListener("input", saveScore);
+
+// function createInput(){
+
+//     let inputHiscore = document.createElement("input");
+//     inputHiscore.setAttribute("type", "text");
+//     inputHiscore.setAttribute("id", "highScore");
+//     const hiScore = document.getElementById("scoreInput");
+//     hiScore.appendChild(inputHiscore);
+
+    
+
+// };
 
 
+
+myForm.addEventListener("submit", function saveScore(){
+
+
+    let $initials = document.getElementById("initials");
+    let leaderBoard = {
+        name: $initials.value,
+        score: secondsLeft
+    };
+
+    
+    // localStorage.setItem("scoreAndName", JSON.stringify(leaderBoard));
+
+    appendValueToStorage("scoreAndName", leaderBoard);
+
+
+});
+
+
+function appendValueToStorage(key, value) {
+    var values = JSON.parse(localStorage.getItem(key));
+    if (values === null) {
+      values = [];
+    }
+  
+    values.push(value);
+    localStorage.setItem(key, JSON.stringify(values));
+    console.log(localStorage.getItem(key));
+  }
+
+
+//leaderboard function
+
+let $scorepage = document.getElementById("scorePage");
+
+$scorepage.addEventListener("click", function displayScores(){
+    let scores = JSON.parse(localStorage.getItem("scoreAndName"));
+    
+    console.log(scores)
+
+    let score = document.getElementById("triviaBox");
+
+    // test code to make sure it can pull object and display
+    score.textContent = scores[0].name + scores[0].score;
+
+
+    
+
+})
 
 // create a function to start the quiz
 
