@@ -183,26 +183,67 @@ function appendValueToStorage(key, value) {
   }
 
 
+// sort leaderboard function
+
+
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        /* next line works with strings and numbers, 
+         * and you may want to customize it to your needs
+         */
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+
 //leaderboard function
 
 let $scorepage = document.getElementById("scorePage");
 
 $scorepage.addEventListener("click", function displayScores(){
     let scores = JSON.parse(localStorage.getItem("scoreAndName"));
+    // scores.sort(dynamicSort(score));
+
+
     
     console.log(scores)
-
-    let score = document.getElementById("triviaBox");
+    document.getElementById('triviaBox').textContent = "LEADERBOARD";
+    document.getElementById('triviaBox').appendChild(makeUL(scores));
+    // makeUL(scores);
 
     // test code to make sure it can pull object and display
-    score.textContent = scores[0].name + scores[0].score;
-
+    // score.textContent = scores[0].name + scores[0].score;
 
     
-
+    
+    
+    
 })
 
 // create a function to start the quiz
 
+function makeUL(array) {
+    // Create the list element:
+    var list = document.createElement('ul');
+
+    for (var i = 0; i < array.length; i++) {
+        // Create the list item:
+        var item = document.createElement('li');
+
+        // Set its contents:
+        item.appendChild(document.createTextNode(array[i].name + "    "  + array[i].score ));
+
+        // Add it to the list:
+        list.appendChild(item);
+    }
+
+    // Finally, return the constructed list:
+    return list;
+}
 
 
