@@ -52,21 +52,18 @@ function showQuestion(q){
         answ.forEach(function(element, index){
             element.textContent = q.answer[index];
             element.addEventListener("click", function(){
-                if (q.correctAnswer == index){
+                if (q.correctAnswer === index){
                     outcomeDiv.textContent = "Correct, click next";
                     console.log("correct, click next");
+
 
 
                     
                 } else {
                     outcomeDiv.textContent = "Wrong, click next";
-                    // secondsLeft = secondsLeft - 10;
+                    secondsLeft = secondsLeft - 10;
                     console.log("wrong, click next");
-
-
-
-
-                }
+                    }
             })
         
         });    
@@ -122,6 +119,7 @@ function highscore(){
     nextBtn.remove();
     outcomeDiv.remove();
     removeList.remove();
+    $triviabox.remove();
     console.log("high score page");
     console.log(secondsLeft);
     //create high score input form
